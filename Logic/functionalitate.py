@@ -34,6 +34,6 @@ def discount(lista):
             lnew.append(comanda)
         return lnew
 
-    def ord_cresc(lista):
+def cresc(lista):
         lnew = sorted(lista,key = lambda i:getpret(i))
         return lnew

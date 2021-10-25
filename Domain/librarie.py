@@ -71,3 +71,12 @@ def getreducere(comanda):
         :return: reducere (str)
     '''
     return comanda[5]
+
+def to_string(comanda):
+    return "Id:(int), Titlu: (str), Gen: (str), Pret: (float), Reducere: (str)"(
+    getID(comanda),
+    gettitlu(comanda),
+    getgen(comanda),
+    getpret(comanda),
+    getreducere(comanda)
+    )
