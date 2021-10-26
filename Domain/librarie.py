@@ -8,14 +8,8 @@ def creeaza_comanda(ID,titlu,gen,pret,tip,reducere):
         :param reducere: string
         :return: Un dictionar al unei comenzi
     '''
-    return {
-            "ID":ID,
-            "titlu":titlu,
-            "gen": gen,
-            "pret": pret,
-            "tip":tip,
-            "reducere": reducere
-        }
+    return [ID,titlu,gen,pret,tip,reducere]
+        #Touple
 
 def getID(comanda):
     '''
