@@ -56,7 +56,7 @@ def getreducere(comanda):
     return comanda[4]
 
 def to_string(comanda):
-    return "Id:(int), Titlu: (str), Pret: (float),Tip:(str), Reducere: (str)"(
+    return "Id:, Titlu: , Pret: ,Tip:, Reducere:"(
     getID(comanda),
     gettitlu(comanda),
     getpret(comanda),

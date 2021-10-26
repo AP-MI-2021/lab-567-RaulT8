@@ -40,8 +40,8 @@ def getbyreducere(reducere,lista):
             return comanda
     return None
 
-def stergecomanda(ID,lista):
-    return [comanda  for comanda in lista if getID(comanda)!=ID ]
+def stergecomanda(id,lista):
+    return [comanda for comanda in lista if getID(comanda) != id]
 
 def modificarecomanda(id,gen,pret,tip,reducere,lista):
     lnew = []
