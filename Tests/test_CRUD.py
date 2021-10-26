@@ -30,3 +30,12 @@ def test_modif_comanda():
     assert getgen(getbyID("2", l)) == "Nuvela"
     assert getpret(getbyID("2", l)) == 10
     assert getreducere(getbyID("2", l)) == "Gold"
+
+def test_getbyID():
+    l = []
+    l = adaugacomanda("1", "Piratii din Caraibe", "Explorare", 45, "Gold")
+    l = adaugacomanda("2", "Alba ca zapada", "Basm", 25, "Silver")
+    l = modificarecomanda("2", "Alba ca zapada", "Nuvela", 10, "Gold")
+    assert getID(getbyID("2", l)) == "2"
+    assert getID(getbyID("4",l)) == None
+    assert getID(getbyID("1")) =="1"
