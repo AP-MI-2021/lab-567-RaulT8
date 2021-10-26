@@ -1,8 +1,8 @@
 from Domain.librarie import to_string
 from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
-from Logic.functionalitate import discount,modificgen,cresc
+from Logic.functionalitate import discount,cresc
 from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda
-from Logic.functionalitate import discount
+from Logic.functionalitate import discount,modifcomm
 def printmenu():
     print("1. Adaugare comanda: ")
     print("2. Stergere comanda: ")
@@ -20,7 +20,7 @@ def add_comanda(lista):
     reducere = input("Reducere(Silver/Gold): ")
     return adaugacomanda(id,titlu,gen,pret,reducere,lista)
 
-def sterg_comanda(lista,id):
+def sterg_comanda(lista):
     id = input("Dati id ul unei comenzi: ")
     return stergecomanda(id,lista)
 
@@ -30,7 +30,7 @@ def modif_comanda(lista):
     pret = input("Pret nou: ")
     gen = input("Genul nou: ")
     reducere = input("Reducere noua (Silver/Gold): ")
-    return modificgen(id,titlu,gen,pret,reducere,lista)
+    return modifcomm(id,titlu,gen,pret,reducere,lista)
 
 def arata(lista):
     for comanda in lista:
@@ -49,7 +49,7 @@ def menu(lista):
         if optiune == "1":
             lista = add_comanda(lista)
         elif optiune =="2":
-            lista = stergecomanda(lista,id)
+            lista = sterg_comanda(lista)
         elif optiune =="3":
             lista = modif_comanda(lista)
         elif optiune =="4":

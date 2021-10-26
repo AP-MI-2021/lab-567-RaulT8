@@ -1,9 +1,11 @@
 from Domain.librarie import creeaza_comanda,gettip,getpret,getreducere,getID,gettitlu
-def modificgen(gennou,id,lista):
-    lnoua = []
-    for comanda in lista:
-        if id == getID(lista):
-            comanda
+from Logic.CRUD import getbyID
+def modifcomm(id,titlu,pret,gen,reducere,lista):
+    lista[int(id)][1] = titlu
+    lista[int(id)][2] =pret
+    lista[int(id)][3] = gen
+    lista[int(id)][4] = reducere
+
 
 def discount(lista):
     lnew = []
