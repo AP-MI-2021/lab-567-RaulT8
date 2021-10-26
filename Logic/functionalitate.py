@@ -1,4 +1,4 @@
-from Domain.librarie import creeaza_comanda,getgen,gettip,getpret,getreducere,getID,gettitlu
+from Domain.librarie import creeaza_comanda,gettip,getpret,getreducere,getID,gettitlu
 def modificgen(gennou,id,lista):
     lnoua = []
     for comanda in lista:
@@ -15,7 +15,7 @@ def discount(lista):
                 getgen(comanda),
                 getpret(comanda) * 0.95,
                 gettip(comanda),
-                get_reducere(comanda)
+                getreducere(comanda)
 
             )
             lnew.append(comanda_new)
@@ -26,7 +26,7 @@ def discount(lista):
                 getgen(comanda),
                 getpret(comanda) * 0.9,
                 gettip(comanda),
-                get_reducere(comanda)
+                getreducere(comanda)
 
             )
             lnew.append(comanda_new)

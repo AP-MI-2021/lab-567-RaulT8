@@ -1,18 +1,18 @@
-from Domain.comanda import gettip,getID,getreducere,getgen,getpret,creeaza_comanda
-
-def adaugacomanda(ID,gen,pret,tip,reducere,lista):
-    comanda = adaugacomanda(ID,gen,pret,tip,reducere)
+from Domain.librarie import gettip,getID,getreducere,getpret,creeaza_comanda
+from Domain.librarie import creeaza_comanda
+def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
+    comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
     return lista+[comanda]
 
 def getbyID(ID,lista):
     for comanda in lista:
-        if getbyID(comanda) == ID:
+        if getID(comanda) == ID:
             return comanda
     return None
 
 def getbytitlu(titlu,lista):
     for comanda in lista:
-        if getbytitlu(comanda) == titlu:
+        if gettitlu(comanda) == titlu:
             return comanda
         return None
 
@@ -30,7 +30,7 @@ def getbypret(pret,lista):
 
 def getbytip(tip,lista):
     for comanda in lista:
-        if getBytip(comanda) == tip:
+        if getbytip(comanda) == tip:
             return comanda
     return None
 
@@ -47,10 +47,8 @@ def modificarecomanda(id,gen,pret,tip,reducere,lista):
     lnew = []
     for comanda in lista:
         if getID(comanda) == id:
-            comanda_noua = creeaza_comanda(ID,gen,pret,tip,reducere)
+            comanda_noua = creeaza_comanda(id,gen,pret,tip,reducere)
             lnew.append(comanda_noua)
         else:
             lnew.append(comanda)
     return lnew
-
-

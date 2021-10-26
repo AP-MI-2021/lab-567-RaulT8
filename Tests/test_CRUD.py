@@ -1,41 +1,48 @@
-from Domain.librarie import getreducere,getgen,gettip,getpret,getID,gettitlu
-from Logic.CRUD import adaugacomanda,getbyID,getbygen,getbytitlu,getbypret,getbyreducere,getbytip,stergecomanda,modificarecomanda
+from Domain.librarie import getreducere,getpret,getID,gettitlu,gettip
+from Logic.CRUD import adaugacomanda,getbyID,getbytitlu,getbypret,getbyreducere,getbytip,stergecomanda,modificarecomanda
+from Logic.functionalitate import discount
 
-def test_adaugacomanda():
+def test_adaugacomanda(l):
     l=[]
-    l=adaugacomanda("1","Pirati din Caraibe","Explorare",45,"Gold",lista)
+    l=adaugacomanda("1","Pirati din Caraibe",45,"Explorare","Gold",l)
     assert getID(getbyID("1",l)) =="1"
-    assert gettitlu(getbyID("1",l)) == "Piratii din Caraibe"
-    assert getgen(getbyID("1",l)) == "Explorare"
-    assert getpret(getbyID("1",l)) == 45
+    assert gettitlu(getbyID("1",l)) == "Pirati din Caraibe"
+    assert getpret(getbyID("1",l)) ==45
+    assert gettip(getbyID(1,l)) == "Explorare"
     assert getreducere(getbyID("1",l)) == "Gold"
 
 def test_sterge():
     l=[]
-    l=adaugacomanda("1","Piratii din Caraibe","Explorare",45,"Gold")
-    l=adaugacomanda("2","Alba ca zapada","Basm",25,"Silver")
-    l=adaugacomanda("3","Cenusareasa","Basm",30,None)
-    lista = stergecomanda("2",lista)
+    l=adaugacomanda("1","Piratii din Caraibe",45,"Explorare","Gold",l)
+    l=adaugacomanda("2","Alba ca zapada",25,"Basm","Silver",l)
+    l=adaugacomanda("3","Cenusareasa",30,"Nuvela","Gold",l)
+    lista = stergecomanda("2",l)
     assert getbyID("1",lista) is not None
     assert getbyID("2",lista) is None
     assert getbyID("3",lista) is not None
 
 def test_modif_comanda():
     l=[]
-    l = adaugacomanda("1","Piratii din Caraibe","Explorare",45,"Gold")
-    l = adaugacomanda("2", "Alba ca zapada", "Basm", 25, "Silver")
-    l = modificarecomanda("2","Alba ca zapada","Nuvela",10,"Gold")
+    l = adaugacomanda("1","Piratii din Caraibe",45,"Explorare","Gold",l)
+    l = adaugacomanda("2", "Alba ca zapada", 25, "Basm", "Silver",l)
+    l = modificarecomanda("2","Alba ca zapada",10,"Nuvela","Gold",l)
     assert getID(getbyID("2", l)) == "2"
     assert gettitlu(getbyID("2", l)) == "Alba ca zapada"
-    assert getgen(getbyID("2", l)) == "Nuvela"
     assert getpret(getbyID("2", l)) == 10
     assert getreducere(getbyID("2", l)) == "Gold"
 
 def test_getbyID():
     l = []
-    l = adaugacomanda("1", "Piratii din Caraibe", "Explorare", 45, "Gold")
-    l = adaugacomanda("2", "Alba ca zapada", "Basm", 25, "Silver")
-    l = modificarecomanda("2", "Alba ca zapada", "Nuvela", 10, "Gold")
+    l = adaugacomanda("1", "Piratii din Caraibe",  45, "Explorare","Gold")
+    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver")
+    l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold")
     assert getID(getbyID("2", l)) == "2"
-    assert getID(getbyID("4",l)) == None
     assert getID(getbyID("1")) =="1"
+
+def test_discount():
+    l=[]
+    l = adaugacomanda("1", "Piratii din Caraibe",  45,"Explorare", "Gold",l)
+    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver",l)
+    lnew = discount(l)
+    assert getpret(getbyID("1",l)) == 40.5
+    assert getpret(getbyID("2",l)) == 23.75

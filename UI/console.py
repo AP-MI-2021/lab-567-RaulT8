@@ -1,7 +1,8 @@
 from Domain.librarie import to_string
 from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
 from Logic.functionalitate import discount,modificgen,cresc
-
+from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda
+from Logic.functionalitate import discount
 def printmenu():
     print("1. Adaugare comanda: ")
     print("2. Stergere comanda: ")
@@ -53,9 +54,9 @@ def menu(lista):
             lista = modif_comanda(lista)
         elif optiune =="4":
             lista = aplic_discount(lista)
-        elif optiune ="afisare":
+        elif optiune =="afisare":
             arata(lista)
-        elif optiune ="x":
+        elif optiune =="x":
             break
         else:
             print("Optiune incorecta! Reincercati: ")

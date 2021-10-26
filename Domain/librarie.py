@@ -1,14 +1,14 @@
-def creeaza_comanda(ID,titlu,gen,pret,tip,reducere):
+def creeaza_comanda(ID,titlu,pret,tip,reducere):
     '''
         creaza un dictiionar ce reprezinta o comanda
         :param ID: int
-        :param gen: string
+        :param titlu:string
         :param pret: float
-        :param tipul: string
+        :param tip: string
         :param reducere: string
         :return: Un dictionar al unei comenzi
     '''
-    return [ID,titlu,gen,pret,tip,reducere]
+    return [ID,titlu,pret,tip,reducere]
         #Touple
 
 def getID(comanda):
@@ -27,24 +27,13 @@ def gettitlu(comanda):
     '''
     return comanda[1]
 
-
-def getgen(comanda):
-    '''
-        da genul cartii comandate
-        :param comanda:dictionar care contine o comanda
-        :return: gen (str)
-    '''
-    return comanda[2]
-
-
-
 def getpret(comanda):
     '''
         da pretul
         :param comanda:dictionar care contine o comanda
         :return: pret (float)
     '''
-    return comanda[3]
+    return comanda[2]
 
 
 
@@ -54,7 +43,7 @@ def gettip(comanda):
         :param comanda:dictionar care contine o comanda
         :return: tip (str)
     '''
-    return comanda[4]
+    return comanda[3]
 
 
 
@@ -64,13 +53,13 @@ def getreducere(comanda):
         :param comanda:dictionar care contine o comanda
         :return: reducere (str)
     '''
-    return comanda[5]
+    return comanda[4]
 
 def to_string(comanda):
-    return "Id:(int), Titlu: (str), Gen: (str), Pret: (float), Reducere: (str)"(
+    return "Id:(int), Titlu: (str), Pret: (float),Tip:(str), Reducere: (str)"(
     getID(comanda),
     gettitlu(comanda),
-    getgen(comanda),
     getpret(comanda),
+    gettip(comanda),
     getreducere(comanda)
     )
