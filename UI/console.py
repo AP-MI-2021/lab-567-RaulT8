@@ -2,13 +2,15 @@ from Domain.librarie import to_string
 from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
 from Logic.functionalitate import discount,cresc
 from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda
-from Logic.functionalitate import discount,modifcomm
+from Logic.functionalitate import minim_tip,discount,modifcomm,modif_gen
 def printmenu():
     print("1. Adaugare comanda: ")
     print("2. Stergere comanda: ")
     print("3. Modifica comanda: ")
     print("4. Fa discount dupa reducerea comenzii: ")
-    print("5. Ordoneaza crescator dupa pret: ")
+    print("4.1 Modifica gen dupa titlul cartii: ")
+    print("4.4 Pretul minim pe fiecare gen: ")
+    print("4.5 Ordoneaza crescator dupa pret: ")
     print("a. Afisare comenzilor: ")
     print("x. Iesire")
 
@@ -54,6 +56,12 @@ def menu(lista):
             lista = modif_comanda(lista)
         elif optiune =="4":
             lista = aplic_discount(lista)
+        elif optiune =="4.1":
+            modif_gen(lista)
+        elif optiune =="4.4":
+            minim_tip(lista)
+        elif optiune == "4.5":
+            cresc(lista)
         elif optiune =="a":
             print(lista)
         elif optiune =="x":

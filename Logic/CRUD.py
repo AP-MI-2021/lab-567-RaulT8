@@ -1,4 +1,4 @@
-from Domain.librarie import gettip,getID,getreducere,getpret,creeaza_comanda
+from Domain.librarie import gettip,getID,getreducere,getpret,creeaza_comanda,gettitlu
 from Domain.librarie import creeaza_comanda
 def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
     comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
