@@ -1,34 +1,50 @@
 from Domain.librarie import creeaza_comanda,gettip,getpret,getreducere,getID,gettitlu
 from Logic.CRUD import getbyID,getbytitlu,getbypret,getbyreducere,getbytip
 def modifcomm(id,titlu,pret,gen,reducere,lista):
-    if getbyID(id,lista) is None:
-        raise ValueError("Id-ul dat este incorect! ")
-    lnew = []
-    for comanda in lista:
-        if getID(comanda) == id:
-            comandanoua = creeaza_comanda(id,titlu,pret,gen,reducere)
-            lnew.append(comandanoua)
-        else:
-            lnew.append(comanda)
+    '''
+    :param id:
+    :param titlu:
+    :param pret:
+    :param gen:
+    :param reducere:
+    :param lista:
+    :return: modificarea obiectului din lista
+    '''
+    lnew =[]
+    if getbyID(id,lista) is not None:
+        for comanda in lista:
+            if getID(comanda) == id:
+                comandanoua = creeaza_comanda(id,titlu,pret,gen,reducere)
+                lnew.append(comandanoua)
+            else:
+                lnew.append(comanda)
     return lnew
 
 def modif_gen(lista):
+    '''
+    :param lista:
+    :return:lista noua cu obiectul modificat in functie de titlul dat
+    '''
     titlul = input("Dati un titlu:")
-    ok=1
+    gennou = input("Dati noul gen: ")
     for comanda in lista:
-        if getbytitlu(titlul,lista):
-            comanda[1] = input("Introduceti noul titlu: ")
+        if gettitlu(comanda) == titlul:
+            comanda[3] = gennou
 
 
 
 def discount(lista):
+    '''
+    :param lista:
+    :return: Lista noua in care se va aplica la preturile tuturor obiectelor discount ul corespunzator
+    '''
     lnew = []
     for comanda in lista:
         if getreducere(comanda) =="Silver":
             comanda_new = creeaza_comanda(
                 getID(comanda),
                 gettitlu(comanda),
-                getpret(comanda) - 1 / 20 * getpret(comanda),
+                getpret(comanda)*19/20,
                 gettip(comanda),
                 getreducere(comanda)
 
@@ -38,7 +54,7 @@ def discount(lista):
             comanda_new = creeaza_comanda(
                 getID(comanda),
                 gettitlu(comanda),
-                getpret(comanda) - 1 / 10 * getpret(comanda),
+                getpret(comanda)*9/20,
                 gettip(comanda),
                 getreducere(comanda)
 
@@ -53,8 +69,19 @@ def discount(lista):
 
 
 def cresc(lista):
-    lnew = sorted(lista,key = lambda comanda:getpret(comanda))
-    return lnew
+    '''
+    :param lista:
+    :return: Lista initiala ordonata crescator in fucntie de pretul fiecarei comenzi
+    '''
+    size = len(lista)
+    for i in range(size):
+        min_index = i
+        for j in range(i+1,size):
+            if lista[min_index][2] > lista[j][2]:
+                min_index = j
+                temp = lista[i]
+                lista[i] = lista[min_index]
+                lista[min_index] = temp
 
 def minim_tip(lista):
     '''
@@ -62,13 +89,22 @@ def minim_tip(lista):
     :param lista: lista comenzilor
     :return: pretul minim pentru fiecare functie
     '''
-    lnew ={}
+    ltip =[]
+    pret = []
     for comanda in lista:
-        tip = gettip(comanda)
-        pret = getpret(comanda)
-        if tip in lnew:
-            if pret<lnew[tip]:
-                lnew[tip] = pret
-            else:
-                lnew[tip]
-    return lnew
+        ok=1
+        for gen in ltip:
+            if comanda[3]==gen:
+                ok=0
+        if ok ==1:
+            ltip.append(comanda[3])
+
+    for gen in ltip:
+        minim=1000
+        for comanda in lista:
+            if gettip(comanda) == gen and getpret(comanda)<=minim:
+                minim=getpret(comanda)
+        pret.append(minim)
+
+    for i in range(len(pret)):
+        print(ltip[i]," ",pret[i])

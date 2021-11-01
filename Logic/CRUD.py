@@ -1,6 +1,8 @@
 from Domain.librarie import gettip,getID,getreducere,getpret,creeaza_comanda,gettitlu
-from Domain.librarie import creeaza_comanda
+
 def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
+    if getbyID(id,lista):
+        raise ValueError("Comanda cu id ul dat exista deja!")
     comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
     return lista+[comanda]
 
@@ -8,19 +10,12 @@ def getbyID(ID,lista):
     for comanda in lista:
         if getID(comanda) == ID:
             return comanda
-    return None
 
 def getbytitlu(titlu,lista):
     for comanda in lista:
         if gettitlu(comanda) == titlu:
             return comanda
         return None
-
-def getbygen(gen,lista):
-    for comanda in lista:
-        if getgen(comanda) == gen:
-            return comanda
-    return None
 
 def getbypret(pret,lista):
     for comanda in lista:
@@ -29,10 +24,10 @@ def getbypret(pret,lista):
     return None
 
 def getbytip(tip,lista):
-    for comanda in lista:
-        if getbytip(comanda) == tip:
-            return comanda
-    return None
+        for comanda in lista:
+            if gettip(comanda) == tip:
+                return comanda
+        return None
 
 def getbyreducere(reducere,lista):
     for comanda in lista:
@@ -41,7 +36,8 @@ def getbyreducere(reducere,lista):
     return None
 
 def stergecomanda(id,lista):
-    return [comanda for comanda in lista if getID(comanda) != id]
+    if getbyID(id,lista):
+        return [comanda for comanda in lista if getID(comanda) != id]
 
 def modificarecomanda(id,gen,pret,tip,reducere,lista):
     lnew = []

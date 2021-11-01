@@ -21,8 +21,6 @@ def test_sterge():
     assert getbyID("2",lista) is None
     assert getbyID("3",lista) is not None
 
-
-
 def test_modif_comanda():
     l=[]
     l = adaugacomanda("1","Piratii din Caraibe",45,"Explorare","Gold",l)
@@ -40,7 +38,7 @@ def test_getbyID():
     l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver")
     l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold")
     assert getID(getbyID("2", l)) == "2"
-    assert getID(getbyID("1")) =="1"
+    assert getID(getbyID("1",l)) =="1"
 
 def test_discount():
     l=[]

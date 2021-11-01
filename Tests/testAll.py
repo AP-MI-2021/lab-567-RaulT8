@@ -8,4 +8,5 @@ def runAlltests() -> object:
     test_adaugacomanda(l)
     test_sterge()
     test_modif_comanda()
+
     #test_discount()

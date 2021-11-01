@@ -11,6 +11,7 @@ def creeaza_comanda(ID,titlu,pret,tip,reducere):
     return [ID,titlu,pret,tip,reducere]
         #Touple
 
+#Getteri:
 def getID(comanda):
     '''
     da ID ul unei vanzari
