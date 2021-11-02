@@ -10,15 +10,10 @@ def printmenu1():
     print("4)Stop: ")
 
 def add_comanda(lista):
-    id = input("Dati ID: ")
-    titlu = input("Titlu: ")
-    pret = input("Pret: ")
-    gen = input("Genul: ")
-    reducere = input("Reducere(Silver/Gold): ")
-    return adaugacomanda(id,titlu,gen,pret,reducere,lista)
+    pass
 
 def sterg_comanda(lista):
-    id = input("Dati id ul unei comenzi: ")
+    id = input("")
     return stergecomanda(id,lista)
 
 def modif_comanda(lista):
@@ -41,17 +36,45 @@ def aplic_discount(lista):
 
 
 def command_line_console(lista):
+    '''
     while True:
         printmenu1()
-        optiune = input("Introduceti optiunea: ")
-        if optiune == "1":
-            lista = add_comanda(lista)
-        elif optiune =="2":
+        stringconsole = input()
+        stringconsole = stringconsole.split(",")
+        for i in range(len(stringconsole)):
+            if stringconsole[i] == "add":
+                id = stringconsole[i+1]
+                titlu = stringconsole[i+2]
+                pret = stringconsole[i+3]
+                tip=stringconsole[i+4]
+                reducere = stringconsole[i+5]
+            elif  stringconsole[i] =="delete":
+                id = stringconsole[i+1]
+                stergecomanda(id,lista)
+            elif  stringconsole[i] =="showall":
+                print(lista)
+        return lista
+    '''
+    lista = []
+    while True:
+        printmenu1()
+        stringconsole= input()
+        stringconsole = stringconsole.split(',')
+        if stringconsole[0] == "add":
+            id = stringconsole[1]
+            titlu = stringconsole[2]
+            pret = stringconsole[3]
+            tip = stringconsole[4]
+            reducere = stringconsole[5]
+            lista = adaugacomanda(id,titlu,pret,tip,reducere,lista)
+            if stringconsole[6] == "showall":
+                print(lista)
+        elif stringconsole[0] == "showall":
             print(lista)
-        elif optiune =="3":
-            lista = sterg_comanda(lista)
-        elif optiune =="4":
-            break
-
+        elif stringconsole[0] == "exit":
+            return 0
+        elif stringconsole[0] == "delete":
+            id = stringconsole[1]
+            lista = stergecomanda(id, lista)
         else:
-            print("Optiune incorecta! Reincercati: ")
+            print("Optiune gresita!")
