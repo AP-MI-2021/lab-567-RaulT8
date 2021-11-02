@@ -36,25 +36,7 @@ def aplic_discount(lista):
 
 
 def command_line_console(lista):
-    '''
-    while True:
-        printmenu1()
-        stringconsole = input()
-        stringconsole = stringconsole.split(",")
-        for i in range(len(stringconsole)):
-            if stringconsole[i] == "add":
-                id = stringconsole[i+1]
-                titlu = stringconsole[i+2]
-                pret = stringconsole[i+3]
-                tip=stringconsole[i+4]
-                reducere = stringconsole[i+5]
-            elif  stringconsole[i] =="delete":
-                id = stringconsole[i+1]
-                stergecomanda(id,lista)
-            elif  stringconsole[i] =="showall":
-                print(lista)
-        return lista
-    '''
+    
     lista = []
     while True:
         printmenu1()
