@@ -3,11 +3,12 @@ from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
 from Logic.functionalitate import discount,cresc
 from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda
 from Logic.functionalitate import minim_tip,discount,modifcomm,modif_gen
+import re
 def printmenu1():
     print("1)Add:")
     print("2)Showall: ")
     print("3)Delete: ")
-    print("4)Stop: ")
+    print("4)Exit: ")
 
 def add_comanda(lista):
     pass
@@ -34,29 +35,32 @@ def ord_cresc(lista):
 def aplic_discount(lista):
     return discount(lista)
 
+def split_string(string,delimiters):
+    pattern = r'|'.join(delimiters)
+    return split_string(pattern, string)
+
+
 
 def command_line_console(lista):
-    
     lista = []
+    printmenu1()
     while True:
-        printmenu1()
         stringconsole= input()
-        stringconsole = stringconsole.split(',')
-        if stringconsole[0] == "add":
-            id = stringconsole[1]
-            titlu = stringconsole[2]
-            pret = stringconsole[3]
-            tip = stringconsole[4]
-            reducere = stringconsole[5]
-            lista = adaugacomanda(id,titlu,pret,tip,reducere,lista)
-            if stringconsole[6] == "showall":
+        stringconsole = stringconsole.split(';')
+        for comand in stringconsole:
+            comand = comand.split(',')
+            if comand[0] == "add":
+                if len(comand) ==6:
+                    id = comand[1]
+                    titlu = comand[2]
+                    pret = comand[3]
+                    tip = comand[4]
+                    reducere = comand[5]
+                    lista = adaugacomanda(id,titlu,pret,tip,reducere,lista)
+            elif comand[0] == "showall":
                 print(lista)
-        elif stringconsole[0] == "showall":
-            print(lista)
-        elif stringconsole[0] == "exit":
-            return 0
-        elif stringconsole[0] == "delete":
-            id = stringconsole[1]
-            lista = stergecomanda(id, lista)
-        else:
-            print("Optiune gresita!")
+            elif comand[0] == "delete":
+                id = comand[1]
+                lista = stergecomanda(id, lista)
+            elif comand[0] == "exit":
+                return 0

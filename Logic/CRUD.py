@@ -6,16 +6,17 @@ def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
     comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
     return lista+[comanda]
 
-def getbyID(ID,lista):
+def getbyID(id,lista):
     for comanda in lista:
-        if getID(comanda) == ID:
+        if getID(comanda) == id:
             return comanda
+    return None
 
 def getbytitlu(titlu,lista):
     for comanda in lista:
         if gettitlu(comanda) == titlu:
             return comanda
-        return None
+    return None
 
 def getbypret(pret,lista):
     for comanda in lista:
@@ -36,8 +37,10 @@ def getbyreducere(reducere,lista):
     return None
 
 def stergecomanda(id,lista):
-    if getbyID(id,lista):
-        return [comanda for comanda in lista if getID(comanda) != id]
+    if getbyID(id, lista) is None:
+        print("Id ul dat este incorect!")
+    return [comanda for comanda in lista if getID(comanda) != id]
+
 
 def modificarecomanda(id,gen,pret,tip,reducere,lista):
     lnew = []
