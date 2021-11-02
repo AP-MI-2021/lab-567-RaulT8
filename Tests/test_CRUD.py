@@ -34,9 +34,9 @@ def test_modif_comanda():
 
 def test_getbyID():
     l= []
-    l = adaugacomanda("1", "Piratii din Caraibe",  45, "Explorare","Gold")
-    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver")
-    l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold")
+    l = adaugacomanda("1", "Piratii din Caraibe",  45, "Explorare","Gold",l)
+    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver",l)
+    l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold",l)
     assert getID(getbyID("2", l)) == "2"
     assert getID(getbyID("1",l)) =="1"
 
@@ -45,12 +45,12 @@ def test_discount():
     l = adaugacomanda("1", "Piratii din Caraibe",  45,"Explorare", "Gold",l)
     l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver",l)
     lnew = discount(l)
-    assert getpret(getbyID("1",l)) == 40.5
-    assert getpret(getbyID("2",l)) == 23.75
+    assert getpret(getbyID("1",lnew)) == 20.25
+    assert getpret(getbyID("2",lnew)) == 23.75
 
 
 def test_modif_gen():
     l= []
-    l = adaugacomanda("1", "Piratii din Caraibe",  45, "Explorare","Gold")
-    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver")
-    l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold")
+    l = adaugacomanda("1", "Piratii din Caraibe",  45, "Explorare","Gold",l)
+    l = adaugacomanda("2", "Alba ca zapada",  25,"Basm", "Silver",l)
+    l = modificarecomanda("2", "Alba ca zapada",  10,"Nuvela", "Gold",l)
