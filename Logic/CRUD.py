@@ -1,10 +1,8 @@
 from Domain.librarie import gettip,getID,getreducere,getpret,creeaza_comanda,gettitlu
 
 def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
-    if getbyID(id,lista):
-        raise ValueError("Comanda cu id ul dat exista deja!")
-    comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
-    return lista+[comanda]
+        comanda = creeaza_comanda(ID,titlu,pret,tip,reducere)
+        return lista+[comanda]
 
 def getbyID(id,lista):
     for comanda in lista:

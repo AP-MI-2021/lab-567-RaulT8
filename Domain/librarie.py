@@ -36,8 +36,6 @@ def getpret(comanda):
     '''
     return comanda[2]
 
-
-
 def gettip(comanda):
     '''
         da tipul
