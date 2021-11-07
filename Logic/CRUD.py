@@ -5,33 +5,33 @@ def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
         return lista+[comanda]
 
 def getbyID(id,lista):
-    for comanda in lista:
-        if getID(comanda) == id:
-            return comanda
+    for k in lista:
+        if getID(k) == id:
+            return k
     return None
 
 def getbytitlu(titlu,lista):
-    for comanda in lista:
-        if gettitlu(comanda) == titlu:
-            return comanda
+    for k in lista:
+        if gettitlu(k) == titlu:
+            return k
     return None
 
 def getbypret(pret,lista):
-    for comanda in lista:
-        if getpret(comanda) == pret:
-            return comanda
+    for k in lista:
+        if getpret(k) == pret:
+            return k
     return None
 
 def getbytip(tip,lista):
-        for comanda in lista:
-            if gettip(comanda) == tip:
-                return comanda
-        return None
+    for comanda in lista:
+        if gettip(comanda) == tip:
+            return comanda
+    return None
 
 def getbyreducere(reducere,lista):
-    for comanda in lista:
-        if getreducere(comanda) == reducere:
-            return comanda
+    for k in lista:
+        if getreducere(k) == reducere:
+            return k
     return None
 
 def stergecomanda(id,lista):

@@ -10,29 +10,36 @@ def modifcomm(id,titlu,pret,gen,reducere,lista):
     :param lista:
     :return: modificarea obiectului din lista
     '''
-    lnew =[]
-    if getbyID(id,lista) is not None:
-        for comanda in lista:
-            if getID(comanda) == id:
-                comandanoua = creeaza_comanda(id,titlu,pret,gen,reducere)
-                lnew.append(comandanoua)
-            else:
-                lnew.append(comanda)
-    return lnew
+    try:
+        lnew =[]
+        if getbyID(id,lista) is not None:
+            for comanda in lista:
+                if getID(comanda) == id:
+                    comandanoua = creeaza_comanda(id,titlu,pret,gen,reducere)
+                    lnew.append(comandanoua)
+                else:
+                    lnew.append(comanda)
+        return lnew
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
 
 def modif_gen(lista):
     '''
     :param lista:
     :return:lista noua cu obiectul modificat in functie de titlul dat
     '''
-    titlul = input("Dati un titlu:")
-    if getbytitlu(titlul,lista) is None:
-        print("Titlul dat nu exista in lista!")
-    else:
-        gennou = input("Dati noul gen: ")
-        for comanda in lista:
-            if gettitlu(comanda) == titlul:
-                comanda[3] = gennou
+    try:
+        titlul = input("Dati un titlu:")
+        if getbytitlu(titlul,lista) is None:
+            raise ValueError("Titlul dat nu exista in lista!")
+        else:
+            gennou = input("Dati noul gen: ")
+            for comanda in lista:
+                if gettitlu(comanda) == titlul:
+                    comanda[3] = gennou
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+
 
 
 

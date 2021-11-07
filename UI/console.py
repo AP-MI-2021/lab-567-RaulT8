@@ -1,7 +1,7 @@
 from Domain.librarie import to_string
 from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
 from Logic.functionalitate import discount,cresc
-from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda,getbyID,gettip,getbytip
+from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda,getbyID,gettip,getbytip,getID
 from Logic.functionalitate import minim_tip,discount,modifcomm,modif_gen
 def printmenu():
     print("1. Adaugare comanda: ")
@@ -28,34 +28,44 @@ def add_comanda(lista,undoList,redoList):
         if reducere !="Silver" and reducere !="Gold":
             raise ValueError("Reducerea data este incorecta!")
         rezultat = adaugacomanda(id, titlu, gen, pret, reducere, lista)
-        return rezultat
         undoList.append(lista)
         redoList.clear()
+        return rezultat
     except ValueError as ve:
         print("Eroare {}".format(ve))
+        return lista
+
+
 
 
 def sterg_comanda(lista,undoList,redoList):
-    id = input("Dati id ul unei comenzi: ")
-    if getbyID(id,lista) is None:
-        print("Id ul dat nu exista in lista!")
-    rezultat= stergecomanda(id,lista)
-    undoList.append(lista)
-    redoList.clear()
-    return rezultat
+    try:
+        id = input("Dati id ul unei comenzi: ")
+        if getbyID(id,lista) is None:
+            print("Id ul dat nu exista in lista!")
+        rezultat= stergecomanda(id,lista)
+        undoList.append(lista)
+        redoList.clear()
+        return rezultat
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
 
 def modif_comanda(lista,undoList,redoList):
-    id = input("Dati ID ul comenzii de modificat: ")
-    if getbyID(id,lista) is None:
-        print("Id ul dat nu exista in lista!")
-    titlu = input("Titlu nou: ")
-    pret = input("Pret nou: ")
-    gen = input("Genul nou: ")
-    reducere = input("Reducere noua (Silver/Gold): ")
-    rezultat =  modifcomm(id,titlu,gen,pret,reducere,lista)
-    undoList.append(lista)
-    redoList.clear()
-    return rezultat
+    try:
+        id = input("Dati ID ul comenzii de modificat: ")
+        if getbyID(id,lista) is None:
+            print("Id ul dat nu exista in lista!")
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+        titlu = input("Titlu nou: ")
+        pret = input("Pret nou: ")
+        gen = input("Genul nou: ")
+        reducere = input("Reducere noua (Silver/Gold): ")
+        rezultat =  modifcomm(id,titlu,gen,pret,reducere,lista)
+        undoList.append(lista)
+        redoList.clear()
+        return rezultat
+
 
 def arata(lista):
     for comanda in lista:
@@ -70,22 +80,23 @@ def aplic_discount(lista,undoList,redoList):
     return discount(lista)
 
 def afis_dist(lista):
-    newgen =[]
+    newgen1 =[]
     contgen=[]
-    for comanda in lista:
-        if getbytip(comanda[3],newgen) is None:
-                newgen.append(comanda[3])
 
-
-    for i in newgen:
+    for i in lista:
+        if getbytip(i[3],newgen1) is None:
+            newgen1.append(i[3])
+            
+    for i in newgen2:
         c=0
         for comanda in lista:
             if comanda[3] == i:
                 c=c+1
         contgen.append(c)
 
-    for i in range(len(newgen)):
-        print(newgen[i]," ",contgen[i])
+
+    for i in range(len(newgen2)):
+        print(newgen2[i]," ",contgen[i])
 
 
 def menu(lista):
