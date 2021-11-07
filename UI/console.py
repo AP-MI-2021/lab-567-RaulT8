@@ -13,27 +13,32 @@ def printmenu():
     print("4.5 Ordoneaza crescator dupa pret: ")
     print("4.6 Afisarea numărului de titluri distincte pentru fiecare gen.")
     print("u Undo")
-    print("r Redo")
-    print("a. Afisare comenzilor: ")
+    print("a. Afisarea comenzilor: ")
     print("x. Iesire")
 
 def add_comanda(lista,undoList,redoList):
-    id = input("Dati un id: ")
-    if getbyID(id,lista) is  None:
-        id = input("Dati ID: ")
+    try:
+        id = input("Dati un id: ")
+        if getbyID(id,lista) is not None:
+            raise ValueError("Id ul dat exista deja in lista!")
         titlu = input("Titlu: ")
         pret = input("Pret: ")
         gen = input("Genul: ")
         reducere = input("Reducere(Silver/Gold): ")
-        rezultat= adaugacomanda(id,titlu,gen,pret,reducere,lista)
+        if reducere !="Silver" and reducere !="Gold":
+            raise ValueError("Reducerea data este incorecta!")
+        rezultat = adaugacomanda(id, titlu, gen, pret, reducere, lista)
+        return rezultat
         undoList.append(lista)
         redoList.clear()
-        return rezultat
-    else:
-        print("Id-ul dat este deja in lista!")
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+
 
 def sterg_comanda(lista,undoList,redoList):
     id = input("Dati id ul unei comenzi: ")
+    if getbyID(id,lista) is None:
+        print("Id ul dat nu exista in lista!")
     rezultat= stergecomanda(id,lista)
     undoList.append(lista)
     redoList.clear()
@@ -41,6 +46,8 @@ def sterg_comanda(lista,undoList,redoList):
 
 def modif_comanda(lista,undoList,redoList):
     id = input("Dati ID ul comenzii de modificat: ")
+    if getbyID(id,lista) is None:
+        print("Id ul dat nu exista in lista!")
     titlu = input("Titlu nou: ")
     pret = input("Pret nou: ")
     gen = input("Genul nou: ")
@@ -57,7 +64,9 @@ def arata(lista):
 def ord_cresc(lista):
     return cresc(lista)
 
-def aplic_discount(lista):
+def aplic_discount(lista,undoList,redoList):
+    undoList.append(lista)
+    redoList.clear()
     return discount(lista)
 
 def afis_dist(lista):
@@ -92,7 +101,7 @@ def menu(lista):
         elif optiune =="3":
             lista = modif_comanda(lista,undoList,redoList)
         elif optiune =="4":
-            lista = aplic_discount(lista)
+            lista = aplic_discount(lista,undoList,redoList)
         elif optiune =="4.1":
             modif_gen(lista)
         elif optiune =="4.4":
@@ -111,13 +120,6 @@ def menu(lista):
                 redoList.append(lista)
             else:
                 print("Nu se poate face undo!")
-        elif optiune =="r":
-            if len(redoList)>0:
-                lista = redoList.pop()
-                undoList.append(lista)
-            else:
-                print("Nu se poate face redo!")
-
         else:
             print("Optiune incorecta! Reincercati: ")
 

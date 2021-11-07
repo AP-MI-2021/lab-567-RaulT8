@@ -26,10 +26,13 @@ def modif_gen(lista):
     :return:lista noua cu obiectul modificat in functie de titlul dat
     '''
     titlul = input("Dati un titlu:")
-    gennou = input("Dati noul gen: ")
-    for comanda in lista:
-        if gettitlu(comanda) == titlul:
-            comanda[3] = gennou
+    if getbytitlu(titlul,lista) is None:
+        print("Titlul dat nu exista in lista!")
+    else:
+        gennou = input("Dati noul gen: ")
+        for comanda in lista:
+            if gettitlu(comanda) == titlul:
+                comanda[3] = gennou
 
 
 
@@ -39,29 +42,29 @@ def discount(lista):
     :return: Lista noua in care se va aplica la preturile tuturor obiectelor discount ul corespunzator
     '''
     lnew = []
-    for comanda in lista:
-        if getreducere(comanda) =="Silver":
+    for i in lista:
+        if getreducere(i) =="Silver":
             comanda_new = creeaza_comanda(
-                getID(comanda),
-                gettitlu(comanda),
-                getpret(comanda)*19/20,
-                gettip(comanda),
-                getreducere(comanda)
+                getID(i),
+                gettitlu(i),
+                int(getpret(i))*19/20,
+                gettip(i),
+                getreducere(i)
 
             )
             lnew.append(comanda_new)
-        elif getreducere(comanda) =="Gold":
+        elif getreducere(i) =="Gold":
             comanda_new = creeaza_comanda(
-                getID(comanda),
-                gettitlu(comanda),
-                getpret(comanda)*9/20,
-                gettip(comanda),
-                getreducere(comanda)
+                getID(i),
+                gettitlu(i),
+                int(getpret(i))*9/20,
+                gettip(i),
+                getreducere(i)
 
             )
             lnew.append(comanda_new)
         else:
-            lnew.append(comanda)
+            lnew.append(i)
     lista = []
     for comanda in lnew:
         lista.append(comanda)
