@@ -9,14 +9,6 @@ def main():
     l = adaugacomanda("1", "Piratii din Caraibe", 45, "Explorare", "Gold",l)
     l = adaugacomanda("2", "Alba ca zapada", 25, "Basm", "Silver",l)
     l = adaugacomanda("3","Cenusareasa",10,"Basm","Gold",l)
-    print("1)Interfata clasica:")
-    print("2)Interfata noua:")
-    optiune =input("Dati codul de interfata pe care doriti sa o accesati: ")
-    if optiune =="1":
-        menu(l)
-    if optiune =="2":
-        command_line_console(l)
-    else:
-        print("Optiune incorecta!")
+    menu(l)
 
 main()

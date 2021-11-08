@@ -27,7 +27,7 @@ def add_comanda(lista,undoList,redoList):
         reducere = input("Reducere(Silver/Gold): ")
         if reducere !="Silver" and reducere !="Gold":
             raise ValueError("Reducerea data este incorecta!")
-        rezultat = adaugacomanda(id, titlu, gen, pret, reducere, lista)
+        rezultat = adaugacomanda(id, titlu, pret, gen, reducere, lista)
         undoList.append(lista)
         redoList.clear()
         return rezultat
