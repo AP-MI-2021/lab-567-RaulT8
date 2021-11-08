@@ -22,7 +22,7 @@ def add_comanda(lista,undoList,redoList):
         if getbyID(id,lista) is not None:
             raise ValueError("Id ul dat exista deja in lista!")
         titlu = input("Titlu: ")
-        pret = input("Pret: ")
+        pret = float(input("Pret: "))
         gen = input("Genul: ")
         reducere = input("Reducere(Silver/Gold): ")
         if reducere !="Silver" and reducere !="Gold":
@@ -56,7 +56,7 @@ def modif_comanda(lista,undoList,redoList):
         if getbyID(id,lista) is None:
             raise ValueError("Id ul dat nu exista in lista!")
         titlu = input("Titlu nou: ")
-        pret = input("Pret nou: ")
+        pret = float(input("Pret nou: "))
         gen = input("Genul nou: ")
         reducere = input("Reducere noua (Silver/Gold): ")
         rezultat =  modifcomm(id,titlu,gen,pret,reducere,lista)
@@ -103,6 +103,9 @@ def afis_dist(lista):
     for i in range(len(newgen1)):
         print(newgen1[i]," ",contgen[i])
 
+def modific_gen(lista):
+    rezultat = modif_gen(lista)
+    return rezultat
 
 def menu(lista):
     undoList = []
@@ -119,24 +122,31 @@ def menu(lista):
         elif optiune =="4":
             lista = aplic_discount(lista,undoList,redoList)
         elif optiune =="4.1":
-            modif_gen(lista)
+            lista= modific_gen(lista)
         elif optiune =="4.4":
             minim_tip(lista)
         elif optiune == "4.5":
-            lista = ord_cresc(lista,undoList,redoList)
+            lista = ord_cresc(lista)
         elif optiune =="4.6":
             afis_dist(lista)
         elif optiune =="a":
             print(lista)
-        elif optiune == "x":
-            break
         elif optiune =="u":
             if len(undoList)>0:
+                redoList.append(lista)
                 lista = undoList.pop()
                 print(lista)
-                redoList.append(lista)
             else:
                 print("Nu se poate face undo!")
+        elif optiune =="r":
+            if len(redoList)>0:
+                undoList.append(lista)
+                lista = redoList.pop()
+                print(lista)
+            else:
+                print("Nu se poate face redo!")
+        elif optiune == "x":
+            break
         else:
             print("Optiune incorecta! Reincercati: ")
 

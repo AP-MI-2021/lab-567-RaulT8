@@ -39,6 +39,7 @@ def modif_gen(lista):
                     comanda[3] = gennou
     except ValueError as ve:
         print("Eroare {}".format(ve))
+    return lista
 
 
 
