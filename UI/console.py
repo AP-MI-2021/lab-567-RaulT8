@@ -13,6 +13,7 @@ def printmenu():
     print("4.5 Ordoneaza crescator dupa pret: ")
     print("4.6 Afisarea numărului de titluri distincte pentru fiecare gen.")
     print("u Undo")
+    print("r Redo")
     print("a. Afisarea comenzilor: ")
     print("x. Iesire")
 
