@@ -92,6 +92,7 @@ def cresc(lista):
                 temp = lista[i]
                 lista[i] = lista[min_index]
                 lista[min_index] = temp
+    return lista
 
 def minim_tip(lista):
     '''
@@ -112,7 +113,7 @@ def minim_tip(lista):
     for gen in ltip:
         minim=1000
         for comanda in lista:
-            if gettip(comanda) == gen and getpret(comanda)<=minim:
+            if gettip(comanda) == gen and int(getpret(comanda))<=minim:
                 minim=getpret(comanda)
         pret.append(minim)
 

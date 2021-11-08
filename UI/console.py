@@ -42,7 +42,7 @@ def sterg_comanda(lista,undoList,redoList):
     try:
         id = input("Dati id ul unei comenzi: ")
         if getbyID(id,lista) is None:
-            print("Id ul dat nu exista in lista!")
+            raise ValueError("Id ul dat nu exista in lista!")
         rezultat= stergecomanda(id,lista)
         undoList.append(lista)
         redoList.clear()
@@ -54,9 +54,7 @@ def modif_comanda(lista,undoList,redoList):
     try:
         id = input("Dati ID ul comenzii de modificat: ")
         if getbyID(id,lista) is None:
-            print("Id ul dat nu exista in lista!")
-    except ValueError as ve:
-        print("Eroare {}".format(ve))
+            raise ValueError("Id ul dat nu exista in lista!")
         titlu = input("Titlu nou: ")
         pret = input("Pret nou: ")
         gen = input("Genul nou: ")
@@ -65,6 +63,9 @@ def modif_comanda(lista,undoList,redoList):
         undoList.append(lista)
         redoList.clear()
         return rezultat
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+
 
 
 def arata(lista):
@@ -84,10 +85,14 @@ def afis_dist(lista):
     contgen=[]
 
     for i in lista:
-        if getbytip(i[3],newgen1) is None:
+        ok=1
+        for gen in newgen1:
+            if i[3]==gen:
+                ok=0
+        if ok ==1:
             newgen1.append(i[3])
-            
-    for i in newgen2:
+
+    for i in newgen1:
         c=0
         for comanda in lista:
             if comanda[3] == i:
@@ -95,8 +100,8 @@ def afis_dist(lista):
         contgen.append(c)
 
 
-    for i in range(len(newgen2)):
-        print(newgen2[i]," ",contgen[i])
+    for i in range(len(newgen1)):
+        print(newgen1[i]," ",contgen[i])
 
 
 def menu(lista):
@@ -118,7 +123,7 @@ def menu(lista):
         elif optiune =="4.4":
             minim_tip(lista)
         elif optiune == "4.5":
-            cresc(lista)
+            lista = ord_cresc(lista,undoList,redoList)
         elif optiune =="4.6":
             afis_dist(lista)
         elif optiune =="a":
@@ -128,6 +133,7 @@ def menu(lista):
         elif optiune =="u":
             if len(undoList)>0:
                 lista = undoList.pop()
+                print(lista)
                 redoList.append(lista)
             else:
                 print("Nu se poate face undo!")

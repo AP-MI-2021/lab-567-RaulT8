@@ -5,9 +5,9 @@ def adaugacomanda(ID,titlu,pret,tip,reducere,lista):
         return lista+[comanda]
 
 def getbyID(id,lista):
-    for k in lista:
-        if getID(k) == id:
-            return k
+    for comanda in lista:
+        if getID(comanda) == id:
+            return comanda
     return None
 
 def getbytitlu(titlu,lista):
