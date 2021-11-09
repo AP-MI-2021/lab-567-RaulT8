@@ -132,4 +132,3 @@ def titluri_dist():
 
     assert contgen[0] == 1
     assert contgen[1] == 2
-

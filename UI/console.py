@@ -108,6 +108,7 @@ def modific_gen(lista):
     rezultat = modif_gen(lista)
     return rezultat
 
+
 def menu(lista):
     undoList = []
     redoList = []

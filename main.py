@@ -9,6 +9,14 @@ def main():
     l = adaugacomanda("1", "Piratii din Caraibe", 45, "Explorare", "Gold",l)
     l = adaugacomanda("2", "Alba ca zapada", 25, "Basm", "Silver",l)
     l = adaugacomanda("3","Cenusareasa",10,"Basm","Gold",l)
-    menu(l)
+    print("1)Old menu:")
+    print("2)New menu:")
+    optiune = input("Dati codul corespunzator pentru meniul dorit: ")
+    if optiune =="1":
+        menu(l)
+    elif optiune =="2":
+        command_line_console()
+    else:
+        print("Optiune incorecta!")
 
 main()

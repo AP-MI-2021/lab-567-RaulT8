@@ -9,6 +9,7 @@ def printmenu1():
     print("2)Showall: ")
     print("3)Delete: ")
     print("4)Exit: ")
+    print("Entity: ID(int),titlu(str),pret(float),gen(str),reducere(str: Silver/Gold)")
 
 def add_comanda(lista):
     pass
@@ -41,7 +42,7 @@ def split_string(string,delimiters):
 
 
 
-def command_line_console(lista):
+def command_line_console():
     lista = []
     printmenu1()
     while True:
