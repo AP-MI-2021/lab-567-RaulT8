@@ -17,17 +17,24 @@ def printmenu():
     print("a. Afisarea comenzilor: ")
     print("x. Iesire")
 
-def add_comanda(lista,undoList,redoList):
+def add_comanda(lista,undoList,redoList,obiect):
     try:
-        id = input("Dati un id: ")
-        if getbyID(id,lista) is not None:
-            raise ValueError("Id ul dat exista deja in lista!")
-        titlu = input("Titlu: ")
-        pret = float(input("Pret: "))
-        gen = input("Genul: ")
-        reducere = input("Reducere(Silver/Gold): ")
-        if reducere !="Silver" and reducere !="Gold":
-            raise ValueError("Reducerea data este incorecta!")
+        if len(obiect) ==0:
+            id = input("Dati un id: ")
+            if getbyID(id,lista) is not None:
+                raise ValueError("Id ul dat exista deja in lista!")
+            titlu = input("Titlu: ")
+            pret = float(input("Pret: "))
+            gen = input("Genul: ")
+            reducere = input("Reducere(Silver/Gold): ")
+            if reducere !="Silver" and reducere !="Gold":
+                raise ValueError("Reducerea data este incorecta!")
+        else:
+            id = obiect[0]
+            titlu = obiect[1]
+            pret = float(obiect[2])
+            gen = obiect[3]
+            reducere = obiect[4]
         rezultat = adaugacomanda(id, titlu, pret, gen, reducere, lista)
         undoList.append(lista)
         redoList.clear()
@@ -39,9 +46,12 @@ def add_comanda(lista,undoList,redoList):
 
 
 
-def sterg_comanda(lista,undoList,redoList):
+def sterg_comanda(lista,undoList,redoList,obiect):
     try:
-        id = input("Dati id ul unei comenzi: ")
+        if len(obiect) ==0:
+            id = input("Dati id ul unei comenzi: ")
+        else:
+            id = obiect[0]
         if getbyID(id,lista) is None:
             raise ValueError("Id ul dat nu exista in lista!")
         rezultat= stergecomanda(id,lista)
@@ -51,15 +61,23 @@ def sterg_comanda(lista,undoList,redoList):
     except ValueError as ve:
         print("Eroare {}".format(ve))
 
-def modif_comanda(lista,undoList,redoList):
+def modif_comanda(lista,undoList,redoList,obiect):
     try:
-        id = input("Dati ID ul comenzii de modificat: ")
-        if getbyID(id,lista) is None:
-            raise ValueError("Id ul dat nu exista in lista!")
-        titlu = input("Titlu nou: ")
-        pret = float(input("Pret nou: "))
-        gen = input("Genul nou: ")
-        reducere = input("Reducere noua (Silver/Gold): ")
+        if len(obiect) ==0:
+            id = input("Dati ID ul comenzii de modificat: ")
+            if getbyID(id,lista) is None:
+                raise ValueError("Id ul dat nu exista in lista!")
+            titlu = input("Titlu nou: ")
+            pret = float(input("Pret nou: "))
+            gen = input("Genul nou: ")
+            reducere = input("Reducere noua (Silver/Gold): ")
+        else:
+            id = obiect[0]
+            titlu = obiect[1]
+            pret = float(obiect[2])
+            gen = obiect[3]
+            reducere = obiect[4]
+
         rezultat =  modifcomm(id,titlu,gen,pret,reducere,lista)
         undoList.append(lista)
         redoList.clear()
@@ -108,21 +126,37 @@ def modific_gen(lista):
     rezultat = modif_gen(lista)
     return rezultat
 
+def undo(lista,undoList,redoList):
+    if len(undoList) > 0:
+        redoList.append(lista)
+        lista = undoList.pop()
+        return lista
+    else:
+        print("Nu se poate face undo!")
+
+def redo(lista,undoList,redoList):
+    if len(redoList) > 0:
+        undoList.append(lista)
+        lista = redoList.pop()
+        return lista
+    else:
+        print("Nu se poate face redo!")
 
 def menu(lista):
     undoList = []
     redoList = []
+    obiect =[]
     while True:
         printmenu()
         optiune = input("Dati optiunea: ")
         if optiune == "1":
-            lista = add_comanda(lista,undoList,redoList)
+            lista = add_comanda(lista,undoList,redoList,obiect)
         elif optiune =="2":
-            lista = sterg_comanda(lista,undoList,redoList)
+            lista = sterg_comanda(lista,undoList,redoList,obiect)
         elif optiune =="3":
-            lista = modif_comanda(lista,undoList,redoList)
+            lista = modif_comanda(lista,undoList,redoList,obiect)
         elif optiune =="4":
-            lista = aplic_discount(lista,undoList,redoList)
+            lista = aplic_discount(lista,undoList,redoList,obiect)
         elif optiune =="4.1":
             lista= modific_gen(lista)
         elif optiune =="4.4":
@@ -134,19 +168,9 @@ def menu(lista):
         elif optiune =="a":
             print(lista)
         elif optiune =="u":
-            if len(undoList)>0:
-                redoList.append(lista)
-                lista = undoList.pop()
-                print(lista)
-            else:
-                print("Nu se poate face undo!")
+            undo(lista,undoList,redoList)
         elif optiune =="r":
-            if len(redoList)>0:
-                undoList.append(lista)
-                lista = redoList.pop()
-                print(lista)
-            else:
-                print("Nu se poate face redo!")
+            redo(lista,undoList,redoList)
         elif optiune == "x":
             break
         else:

@@ -1,7 +1,7 @@
 from Domain.librarie import to_string
 from Logic.CRUD import adaugacomanda,modificarecomanda,stergecomanda
 from Logic.functionalitate import discount,cresc
-from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda
+from Logic.CRUD import adaugacomanda,stergecomanda,modificarecomanda,getbyID
 from Logic.functionalitate import minim_tip,discount,modifcomm,modif_gen
 import re
 def printmenu1():
@@ -52,16 +52,28 @@ def command_line_console():
             comand = comand.split(',')
             if comand[0] == "add":
                 if len(comand) ==6:
-                    id = comand[1]
-                    titlu = comand[2]
-                    pret = comand[3]
-                    tip = comand[4]
-                    reducere = comand[5]
-                    lista = adaugacomanda(id,titlu,pret,tip,reducere,lista)
+                    try:
+                        id = comand[1]
+                        if getbyID(id,lista) is not None:
+                            raise ValueError("Id ul dat exista deja in lista!")
+                        titlu = comand[2]
+                        pret = comand[3]
+                        tip = comand[4]
+                        reducere = comand[5]
+                        if reducere != "Silver" and reducere != "Gold":
+                            raise ValueError("Reducerea data este incorecta!")
+                        lista = adaugacomanda(id,titlu,pret,tip,reducere,lista)
+                    except ValueError as ve:
+                        print("Eroare {}".format(ve))
             elif comand[0] == "showall":
                 print(lista)
             elif comand[0] == "delete":
-                id = comand[1]
-                lista = stergecomanda(id, lista)
+                try:
+                    id = comand[1]
+                    if getbyID(id,lista) is None:
+                        raise ValueError("Id ul dat nu exista in lista!")
+                    lista = stergecomanda(id, lista)
+                except ValueError as ve:
+                    print("Eroare {}".format(ve))
             elif comand[0] == "exit":
                 return 0
