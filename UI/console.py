@@ -74,11 +74,11 @@ def modif_comanda(lista,undoList,redoList,obiect):
         else:
             id = obiect[0]
             titlu = obiect[1]
-            pret = float(obiect[2])
+            pret = obiect[2]
             gen = obiect[3]
             reducere = obiect[4]
         cop_list = lista.copy()
-        rezultat =  modifcomm(id,titlu,gen,pret,reducere,lista)
+        rezultat =  modifcomm(id,titlu,pret,gen,reducere,lista)
         main_undo(undoList, redoList, cop_list)
         return rezultat
     except ValueError as ve:

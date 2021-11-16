@@ -17,5 +17,4 @@ def runAlltests() -> object:
     test_ordcresc()
     titluri_dist()
     test_undored()
-
     test_discount()
